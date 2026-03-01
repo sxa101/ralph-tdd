@@ -12,9 +12,21 @@ A specialized skill that implements features using a rigorous "Ralph" Test-Drive
 
 ### OpenCode
 
+#### Option 1: Global Install (recommended for all projects)
+
+```bash
+mkdir -p ~/.config/opencode/skills
+cp -r .opencode/skills/ralph-tdd ~/.config/opencode/skills/
+```
+
+Then restart opencode and use:
 ```bash
 /skill ralph-tdd
 ```
+
+#### Option 2: Per-project Install
+
+Copy `.opencode/skills/ralph-tdd` to your project's `.opencode/skills/` directory.
 
 ### Gemini CLI
 
@@ -22,7 +34,7 @@ A specialized skill that implements features using a rigorous "Ralph" Test-Drive
 activate_skill ralph-tdd
 ```
 
-### 2. The Process
+## The Process
 
 Once activated, the skill will guide you through the following phases:
 
