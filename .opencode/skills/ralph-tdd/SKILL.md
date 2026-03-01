@@ -18,6 +18,8 @@ This skill guides you through the "Ralph" methodology for high-quality software 
 | [exit-criteria.md](references/exit-criteria.md) | Phase completion requirements |
 | [sample-quorum.md](references/sample-quorum.md) | Example discussions |
 | [timeboxing.md](references/timeboxing.md) | Duration guidelines |
+| [checkpoint-protocol.md](references/checkpoint-protocol.md) | Session persistence protocol |
+| [checkpoint-template.md](references/checkpoint-template.md) | Checkpoint file templates |
 
 ## Phases
 
@@ -84,6 +86,45 @@ Example ambiguous requests:
 - "Make it faster" → What specifically? By how much?
 - "Add validation" → What rules? For what inputs?
 - "Improve error handling" → Which errors? What should happen?
+
+---
+
+## Session Checkpointing
+
+The Ralph-TDD skill supports session persistence via checkpoint files. These allow long-running tasks to be resumed across multiple sessions.
+
+### Checkpoint Files
+
+Checkpoint files are stored in a `.ralph/` subdirectory in the project root:
+
+| File | Purpose |
+|------|---------|
+| `.ralph/PLAN.md` | Ratified design, current phase, next steps |
+| `.ralph/STATUS.md` | TDD iteration progress, completed components |
+| `.ralph/IMPLEMENTATION.md` | Implementation decisions, code summaries |
+
+### Checkpoint Protocol
+
+1. **Session Start:** Agent reads `.ralph/*.md` files to restore context. If files don't exist, start fresh.
+
+2. **After Each Phase:** Agent writes updated checkpoint files:
+   - After Phase 1: Update PLAN.md with ratified design
+   - After Phase 2 (each iteration): Update STATUS.md and IMPLEMENTATION.md
+   - After Phase 3: Mark as complete in STATUS.md
+
+3. **Session End:** Files remain for future resume.
+
+4. **Resume Request:** User can request "resume" or "continue" to load checkpoint context.
+
+### Validation
+
+- If checkpoint files are corrupted/malformed, log warning and start fresh
+- If checkpoints are >7 days old, warn user before resuming
+- Do NOT store secrets in checkpoint files
+
+### Reference
+
+See [checkpoint-protocol.md](references/checkpoint-protocol.md) for detailed protocol and [checkpoint-template.md](references/checkpoint-template.md) for file templates.
 
 ---
 
