@@ -7,51 +7,89 @@ description: Implements features using a rigorous "Ralph" TDD process involving 
 
 This skill guides you through the "Ralph" methodology for high-quality software engineering. It enforces a strict separation of design, implementation, and review.
 
+## Reference Documents
+
+| Document | Purpose |
+|----------|---------|
+| [quorum-guidelines.md](references/quorum-guidelines.md) | Personas and quorum protocols |
+| [tdd-workflow.md](references/tdd-workflow.md) | TDD loop instructions |
+| [design-document-template.md](references/design-document-template.md) | Design doc format |
+| [test-strategy-template.md](references/test-strategy-template.md) | Test plan format |
+| [exit-criteria.md](references/exit-criteria.md) | Phase completion requirements |
+| [sample-quorum.md](references/sample-quorum.md) | Example discussions |
+| [timeboxing.md](references/timeboxing.md) | Duration guidelines |
+
 ## Phases
 
 ### Phase 1: Critical Design Quorum
 
 **Goal:** Establish a ratified design before coding.
 
-1.  **Read Guidelines:** Review [quorum-guidelines.md](references/quorum-guidelines.md) to understand the personas (Architect, SE, QA).
-2.  **Simulate Discussion:**
-    *   Act as the **Software Engineer** to propose a solution based on the user's request.
-    *   Act as the **Architect** to critique the design (focus on patterns, structure).
-    *   Act as the **QA Engineer** to critique the testability and edge cases.
-3.  **Iterate:** Refine the plan until all three personas agree.
-4.  **Output:** Present the final **Ratified Design Plan** to the user for approval.
+1.  **Clarify:** If user request is ambiguous, ask clarifying questions before proceeding.
+2.  **Read Guidelines:** Review [quorum-guidelines.md](references/quorum-guidelines.md) to understand the personas.
+3.  **Simulate Discussion:**
+    *   Act as the **Software Engineer** to propose a solution.
+    *   Act as the **Architect** to critique the design.
+    *   Act as the **QA Engineer** to critique testability and edge cases.
+4.  **Iterate:** Refine until unanimous approval.
+5.  **Output:** Present the **Ratified Design Plan** using [design-document-template.md](references/design-document-template.md).
+
+**Checkpoint:** Verify against [exit-criteria.md](references/exit-criteria.md) before proceeding.
 
 ### Phase 2: Ralph-Based TDD Loop
 
 **Goal:** Implement the ratified design using strict TDD.
 
 1.  **Read Workflow:** Review [tdd-workflow.md](references/tdd-workflow.md).
-2.  **Execute Loop:** For each component/feature in the plan:
-    *   **RED:** Write a failing test. verify failure.
+2.  **Execute Loop:** For each component/feature:
+    *   **RED:** Write failing test. Verify failure message.
     *   **GREEN:** Write minimal code to pass.
     *   **REFACTOR:** Clean up.
-    *   **RALPH CHECK:** Verify elegance and robustness.
-3.  **Progress:** Use the `write_todos` tool to track the implementation steps.
+    *   **RALPH CHECK:** Verify elegance.
+3.  **Track Progress:** Use `write_todos` to track iterations.
+
+**Checkpoint:** Run tests after each iteration. Verify against exit criteria.
 
 ### Phase 3: Critical Review Quorum
 
 **Goal:** Final quality gate.
 
-1.  **Review:** Once implementation is complete, simulate the Quorum again.
+1.  **Review:** Simulate the Quorum again.
 2.  **Critique:**
-    *   **Architect:** Review for drift from the original design and code quality.
-    *   **QA:** Review the comprehensive test suite coverage.
+    *   **Architect:** Check for design drift.
+    *   **QA:** Check test coverage (minimum: happy path + 2 negative cases).
 3.  **Decision:**
-    *   If issues are found, move to Phase 4.
-    *   If unanimous approval, the task is complete.
+    *   Issues found → Phase 4.
+    *   Unanimous approval → Complete.
 
-### Phase 4: Final Rework (If needed)
+**Checkpoint:** Verify against [exit-criteria.md](references/exit-criteria.md).
 
-1.  Address specific feedback from Phase 3.
-2.  Re-run the Review Quorum (Phase 3) until approval is granted.
+### Phase 4: Final Rework
+
+1.  Address specific feedback.
+2.  Re-run Review Quorum until approval.
+
+---
+
+## Clarification Protocol
+
+If the user request is ambiguous:
+
+1.  **Identify gaps:** What is unclear?
+2.  **Ask questions:** Get concrete requirements
+3.  **Document assumptions:** State what you're assuming
+4.  **Proceed only when clear:** Don't guess at requirements
+
+Example ambiguous requests:
+- "Make it faster" → What specifically? By how much?
+- "Add validation" → What rules? For what inputs?
+- "Improve error handling" → Which errors? What should happen?
+
+---
 
 ## Instructions for the Agent
 
-*   **Roleplay:** You must explicitly label your outputs with the persona speaking (e.g., "**[Architect]**: I have a concern about...").
-*   **Strictness:** Do not bypass the Quorum steps. Do not start coding until the Design Quorum is complete and the user has approved the plan.
-*   **Verification:** Always run tests after every change in the TDD loop.
+*   **Roleplay:** Label outputs with persona (e.g., "**[Architect]**: ...").
+*   **Strictness:** Do not bypass Quorum. Do not code until Design Quorum is approved.
+*   **Verification:** Always run tests after TDD changes.
+*   **Timeboxing:** Use [timeboxing.md](references/timeboxing.md) as a guide.
