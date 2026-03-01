@@ -1,6 +1,6 @@
 # Ralph-TDD Skill
 
-A specialized skill for the Gemini CLI that implements features using a rigorous "Ralph" Test-Driven Development (TDD) process. This process involves a 3-person design quorum, strict TDD loops, and a final critical review to ensure the highest quality of code and design.
+A specialized skill that implements features using a rigorous "Ralph" Test-Driven Development (TDD) process. This process involves a 3-person design quorum, strict TDD loops, and a final critical review to ensure the highest quality of code and design.
 
 ## Features
 
@@ -10,9 +10,13 @@ A specialized skill for the Gemini CLI that implements features using a rigorous
 
 ## Usage
 
-### 1. Activation
+### OpenCode
 
-To use this skill, activate it within your Gemini CLI session:
+```bash
+/skill ralph-tdd
+```
+
+### Gemini CLI
 
 ```bash
 activate_skill ralph-tdd
